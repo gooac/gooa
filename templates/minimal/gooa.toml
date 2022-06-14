@@ -1,0 +1,4 @@
+
+[gooa]
+input = "src/"
+output = "lua/"

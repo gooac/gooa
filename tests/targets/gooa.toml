@@ -1,0 +1,34 @@
+
+[gooa]
+# Where the source is located
+input           = "src/"
+
+# Where to compile out to
+output          = "lua/"
+
+# Recursively search input directories?
+recursive       = true
+
+# Only allow .lua and .gooa extensions
+# We dont necessarily need this here
+# because were not mapping but
+# still safe to have incase of a README
+restrict_ext    = true
+
+# Do we want to directly output the input file
+# and folder structure to the output?
+# Here we dont!
+# So we'll specify certain targets which are
+# places that these file outputs will go communily.
+mapout          = false
+
+# If there isnt a target thats been matched
+# go here:
+default_target  = "other.lua"
+
+# Map of targets
+# Target regex only searches in the file name
+# aka, test_some.lua would be read as test_some
+[targets]
+# regex         = output_file
+"^test_"        = "all_tests.lua"

@@ -1,0 +1,13 @@
+
+[gooa]
+input = "src/"
+output = "lua/folder/"
+mapout = false
+recursive = true
+default_target = "compiled.lua"
+
+[watch]
+recompile_on_exit = true
+
+[targets]
+"^_empty" = "empty.lua"

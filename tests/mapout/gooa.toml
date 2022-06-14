@@ -1,0 +1,34 @@
+
+[gooa]
+# Where the source directory is
+input           = "src/"
+
+# Where to write the output
+output          = "lua/"
+
+# Recursively search the input directory?
+recursive       = true
+
+# Only allow .lua or .gooa file extensions?
+# This is highly recommended to remain on
+# Only turn this off if youre confident it
+# wont search in a directory with any non-gooa
+# compliant code or text.
+restrict_ext    = true
+
+# This signifies whether or not to write
+# output where it is in the source dir
+mapout          = true
+
+# Aka:
+# if mapout was true
+# 
+# src/
+# - a/
+#  - test.lua  
+# 
+# would be written to lua/ as
+# 
+# lua/
+# - a/
+#  - test.lua
