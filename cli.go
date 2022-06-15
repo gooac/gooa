@@ -16,26 +16,23 @@ func NewCLI() CLI {
 
 	cli.commands["compile"] = cli.Compile
 	cli.commands["watch"] = cli.Watch
-	cli.commands["init"] = cli.Init
+	// cli.commands["init"] = cli.Init
 	cli.commands["help"] = cli.Help
 
 	return cli
 }
 
 func (self *CLI) Help(args []string) {
-	print(`
-Gooa - The Lua Preprocessor (https://github.com/gooac/gooa)
+	print(`Gooa - The Lua Preprocessor (https://github.com/gooac/gooa)
 
 Help:
-	compile [<project>] 			- Compiles the given project directory or 
-	                        		  the current directory, if invalid
-	
-	watch [<project>]				- Watches the given directory (or current if nil) 
-						    		  for changes and compiles the given file when needed.
+	compile [<project>]             - Compiles the given project directory or 
+	                                the current directory, if invalid
 
-	init <template> <name> [dir] 	- Initializes a new project folder
+	watch [<project>]               - Watches the given directory (or current if nil) 
+                                    for changes and compiles the given file when needed.
 
-	help                			- Prints this message
+	help                            - Prints this message
 `)
 }
 
@@ -115,6 +112,8 @@ func (self *CLI) Init(args []string) {
 			fmt.Printf("Failed to create directory %v (%v)", location, err)
 			return
 		}
+	} else {
+		location = progname
 	}
 
 	self.InitTemplate(filepath.Clean(location), temp, progname)

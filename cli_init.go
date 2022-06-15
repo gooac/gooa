@@ -3,10 +3,9 @@ package main
 import (
 	"embed"
 	"fmt"
-	"os"
+	// "os"
 	"regexp"
 	"strings"
-	// "os"
 )
 
 //go:embed templates/*
@@ -37,43 +36,10 @@ func (self *CLI) InitTemplate(dir string, name string, project string) {
 		"dir": dir,
 	}
 	
-	self.InitTemplateDirectory(name, name, dir)
+	self.InitTemplateDirectory(name, "", dir)
 }
 
-func (self *CLI) InitTemplateDirectory(dir string, real string, where string) {
-	os.MkdirAll(where + "/" + dir, 0757)
-	
-	tmpl, err := templates.ReadDir("templates/" + dir)
-	if err != nil {
-		fmt.Printf("Failed to read template directory (%v)", err)
-		return
-	}
-
-	for _, v := range tmpl {
-		r := real + "/" + self.ReplaceTemplateNames(v.Name())
-
-		if v.IsDir() {
-			self.InitTemplateDirectory(dir + "/" + v.Name(), r, where)
-		} else {
-			f, err := templates.ReadFile("templates/" + dir + "/" + v.Name())			
-			
-			if err != nil {
-				fmt.Printf("Failed to read template file 'templates/%v/%v' (%v)", dir, v.Name(), err)
-				return
-			}
-			
-			os.Remove(r)
-			file, err := os.OpenFile(where + "/" + r, os.O_CREATE|os.O_WRONLY, 0757)
-
-			if err != nil {
-				fmt.Printf("Failed to open template output file '%v' (%v)", where + "/" + r, err)
-				return
-			}
-
-			file.WriteString(self.ReplaceTemplateNames(string(f)))
-			file.Close()
-		}
-	}
+func (self *CLI) InitTemplateDirectory(dir string, real string, location string) {	
 }
 
 var initregex *regexp.Regexp

@@ -1,0 +1,12 @@
+
+[gooa]
+input           = "src/"
+output          = "lua/some/"
+recursive       = true
+restrict_ext    = true
+mapout          = false
+default_target  = "sh_some.lua"
+
+[targets]
+"^sv_"        = "sv_some.lua"
+"^cl_"        = "cl_some.lua"
