@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 	"regexp"
 	"strings"
 
@@ -50,7 +51,7 @@ func (self *Project) WatchHandleWrite(w *watcher.Watcher, e watcher.Event) {
 			self.RegexCache[dir] = rgx
 		}
 
-		where := self.Root + "/" + self.Config.Gooa.Output + "/" + self.Where(dir)
+		where := filepath.Clean(self.Root + "/" + self.Config.Gooa.Output + "/" + self.Where(dir))
 		f, err := os.ReadFile(where)
 
 		if err != nil {
@@ -119,7 +120,7 @@ func (self *Project) WatchHandleCreate(w *watcher.Watcher, e watcher.Event) {
 			self.RegexCache[dir] = rgx
 		}
 
-		where := self.Root + "/" + self.Config.Gooa.Output + "/" + self.Where(dir)
+		where := filepath.Clean(self.Root + "/" + self.Config.Gooa.Output + "/" + self.Where(dir))
 		f, err := os.OpenFile(where, os.O_WRONLY|os.O_APPEND|os.O_CREATE, 0757)
 
 		if err != nil {
@@ -165,7 +166,7 @@ func (self *Project) WatchHandleRemove(w *watcher.Watcher, e watcher.Event) {
 		self.RegexCache[dir] = rgx
 	}
 
-	where := self.Root + "/" + self.Config.Gooa.Output + "/" + self.Where(dir)
+	where := filepath.Clean(self.Root + "/" + self.Config.Gooa.Output + "/" + self.Where(dir))
 	f, err := os.ReadFile(where)
 
 	if err != nil {
@@ -225,7 +226,7 @@ func (self *Project) WatchHandleRename(w *watcher.Watcher, e watcher.Event) {
 			self.RegexCache[dir] = rgx
 		}
 
-		where := self.Root + "/" + self.Config.Gooa.Output + "/" + self.Where(dir)
+		where := filepath.Clean(self.Root + "/" + self.Config.Gooa.Output + "/" + self.Where(dir))
 		f, err := os.ReadFile(where)
 
 		if err != nil {

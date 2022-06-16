@@ -50,7 +50,14 @@ func (self *Project) Compile(dir string) error {
 	return nil
 }
 
-func (self *Project) Where(strippedname string) string {
+func (self *Project) Where(path string) string {
+	names := strings.Split(strings.ReplaceAll(path, "\\", "/"), "/")
+
+	fname := names[len(names) - 1]
+	
+	ext := filepath.Ext(fname)
+	strippedname := strings.TrimSuffix(fname, ext)
+
 	outfile := self.Config.Gooa.Default_target
 
 	for rgx, fl := range self.Targets {
@@ -81,10 +88,8 @@ func (self *Project) CompileDirectory(dir string, recur bool, relative string, o
 
 				self.CompileFile(dir, v.Name(), outdir + relative + "/" + v.Name(), false)
 				self.Compiler.Err.Reset()
-			} else {
-				strippedname := strings.TrimSuffix(v.Name(), ext)
-				
-				outfile := self.Where(strippedname)
+			} else {				
+				outfile := self.Where(v.Name())
 				if self.Config.Gooa.Restrict_ext {
 					if ext != ".lua" && ext != ".gooa" {
 						return nil
