@@ -16,6 +16,8 @@ github.com/gooac/gooac v1.0.2-0.20220614131104-ffac2fe672c9 h1:AnLBAGxtlk+M7D9//
 github.com/gooac/gooac v1.0.2-0.20220614131104-ffac2fe672c9/go.mod h1:1vSyu+atcMB2baWJe3XNgRnWkEVEJ1O+/iXL7YVN3ss=
 github.com/gooac/gooac v1.0.2-0.20220614131922-1831c37e725f h1:0+3myc7zZB1bZm2NDcb9aZTe11rgIbtNnGlEvZcwF0w=
 github.com/gooac/gooac v1.0.2-0.20220614131922-1831c37e725f/go.mod h1:1vSyu+atcMB2baWJe3XNgRnWkEVEJ1O+/iXL7YVN3ss=
+github.com/gooac/gooac v1.0.2 h1:1IS/RN5clpgnkdtuDyf5FjWN+e1IkVstWMnLLVKElnQ=
+github.com/gooac/gooac v1.0.2/go.mod h1:1vSyu+atcMB2baWJe3XNgRnWkEVEJ1O+/iXL7YVN3ss=
 github.com/goreleaser/fileglob v1.3.0 h1:/X6J7U8lbDpQtBvGcwwPS6OpzkNVlVEsFUVRx9+k+7I=
 github.com/goreleaser/fileglob v1.3.0/go.mod h1:Jx6BoXv3mbYkEzwm9THo7xbr5egkAraxkGorbJb4RxU=
 github.com/matryer/is v1.4.0/go.mod h1:8I/i5uYgLzgsgEloJE1U6xx5HkBQpAZvepWuujKwMRU=
