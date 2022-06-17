@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 type CLIHandler func([]string)
@@ -50,8 +51,7 @@ func (self *CLI) Compile(args []string) {
 		return
 	}
 
-	pj, cfgerr := NewProject(args[0])
-
+	pj, cfgerr := NewProject(args[0], args[0])
 
 	if cfgerr {
 		return
@@ -80,7 +80,16 @@ func (self *CLI) Watch(args []string) {
 		return
 	}
 
-	pj, cfgerr := NewProject(args[0])
+	abs, err := filepath.Abs(args[0])
+
+	if err != nil {
+		fmt.Printf("Failed to get absolute of '%v' (%v)", args[0], err)
+	}
+
+	pathsplit := strings.Split(strings.ReplaceAll(abs, "\\", "/"), "/")
+	root := pathsplit[len(pathsplit)-1]
+
+	pj, cfgerr := NewProject(args[0], root)
 
 	if cfgerr {
 		return

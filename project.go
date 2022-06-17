@@ -13,6 +13,7 @@ import (
 
 type Project struct {
 	Root 		string
+	RealRoot 	string
 	Config 		*GooaToml
 	Compiler	*gooa.Gooa
 	Targets 	map[*regexp.Regexp]string
@@ -21,7 +22,7 @@ type Project struct {
 	RegexCache	map[string]*regexp.Regexp
 }
 
-func NewProject(dir string) (Project, bool) {
+func NewProject(dir string, root string) (Project, bool) {
 	pj := Project{}
 	toml, err := GenerateTomlConfig(dir + "gooa.toml")
 
@@ -29,7 +30,8 @@ func NewProject(dir string) (Project, bool) {
 		return pj, true
 	}
 
-	pj.Root = filepath.Clean(dir)
+	pj.RealRoot = filepath.Clean(root)
+	pj.Root = dir
 	pj.Compiler = gooa.NewGooa()
 	pj.Config = toml
 	pj.Metadata = false

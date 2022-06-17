@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"path/filepath"
 	"strings"
 )
@@ -19,7 +20,7 @@ func (self Project) AbsolutePathToProjectInfo(p string) (error, ProjectPathInfo)
 	info := ProjectPathInfo{}
 
 	path := filepath.Clean(p)
-	split := strings.SplitN(path, self.Root, 2)
+	split := strings.SplitN(path, self.RealRoot, 2)
 	
 	info.RealPath = path
 	info.Split = split
@@ -43,7 +44,7 @@ func (self Project) AbsolutePathToProjectInfo(p string) (error, ProjectPathInfo)
 	outsplit := strings.SplitN(incl, in, 2)
 	
 	if len(outsplit) == 1 {
-		return errors.New("Failed to find prefix in path"), info
+		return errors.New(fmt.Sprintf("Failed to find prefix in path (%v/%v->%v)", incl, in, outsplit)), info
 	}
 
 	info.FoundIn = out
